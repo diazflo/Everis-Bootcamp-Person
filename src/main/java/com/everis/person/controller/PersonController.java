@@ -4,10 +4,7 @@ import com.everis.person.entity.Wallet;
 import com.everis.person.service.WalletService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -25,5 +22,10 @@ public class PersonController {
     @PostMapping("/createWallet")
     public Mono<Wallet> createPago(@RequestBody Wallet request){
         return service.createWallet(request);
+    }
+
+    @GetMapping("/retrieveWalletByPerson/{dni}")
+    public Mono<Wallet> getWalletByPerson(@PathVariable("dni") String dni){
+        return service.getWalletByPerson(dni).switchIfEmpty(Mono.error(new Exception()));
     }
 }

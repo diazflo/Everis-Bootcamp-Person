@@ -28,4 +28,9 @@ public class WalletServiceImpl implements WalletService {
         });
     }
 
+    @Override
+    public Mono<Wallet> getWalletByPerson(String dni) {
+        return repository.findWalletByPersonDni(dni);
+    }
+
 }
