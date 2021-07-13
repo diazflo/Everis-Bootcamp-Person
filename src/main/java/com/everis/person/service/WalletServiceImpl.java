@@ -1,5 +1,6 @@
 package com.everis.person.service;
 
+import com.everis.person.entity.Payment;
 import com.everis.person.entity.Wallet;
 import com.everis.person.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,11 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public Mono<Wallet> getWalletByPerson(String dni) {
         return repository.findWalletByPersonDni(dni);
+    }
+
+    @Override
+    public Mono<Payment> getPayment(Payment payment) {
+        return null;
     }
 
 }
