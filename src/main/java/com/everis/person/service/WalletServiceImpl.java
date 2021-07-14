@@ -2,12 +2,15 @@ package com.everis.person.service;
 
 import com.everis.person.entity.Payment;
 import com.everis.person.entity.Wallet;
+import com.everis.person.kafka.kpayment.KafkaPayment;
 import com.everis.person.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
 import java.util.UUID;
 
 @Slf4j
@@ -15,10 +18,18 @@ import java.util.UUID;
 public class WalletServiceImpl implements WalletService {
 
     private final WalletRepository repository;
+    private final KafkaTemplate kafkaTemplate;
+    private KafkaPayment kafkaPayment;
 
     @Autowired
-    public WalletServiceImpl(WalletRepository repository) {
+    public WalletServiceImpl(WalletRepository repository, KafkaTemplate kafkaTemplate) {
         this.repository = repository;
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    @PostConstruct
+    public void init(){
+        kafkaPayment = new KafkaPayment(kafkaTemplate);
     }
 
     @Override
