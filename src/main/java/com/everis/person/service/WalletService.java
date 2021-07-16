@@ -10,5 +10,4 @@ public interface WalletService {
 
     Mono<Wallet> getWalletByPerson(String dni);
 
-    Mono<Payment> getPayment(Payment payment);
 }

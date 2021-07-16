@@ -28,4 +28,6 @@ public class PersonController {
     public Mono<Wallet> getWalletByPerson(@PathVariable("dni") String dni){
         return service.getWalletByPerson(dni).switchIfEmpty(Mono.error(new Exception()));
     }
+
+
 }

@@ -15,5 +15,6 @@ public class Wallet {
     @Id
     private UUID id;
     private Person person;
+    private String currencyCode;
     private BigDecimal amount;
 }

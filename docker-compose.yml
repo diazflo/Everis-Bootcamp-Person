@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  person-wallet-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docker-person-wallet-service
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      bank_network:
+        aliases:
+          - app_subnet
+        #ipv4_address: 172.20.0.4
+networks:
+  bank_network:
+    name: app_subnet
+    external: true

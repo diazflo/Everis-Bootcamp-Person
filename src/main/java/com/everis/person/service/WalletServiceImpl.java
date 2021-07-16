@@ -45,9 +45,4 @@ public class WalletServiceImpl implements WalletService {
         return repository.findWalletByPersonDni(dni);
     }
 
-    @Override
-    public Mono<Payment> getPayment(Payment payment) {
-        return null;
-    }
-
 }

@@ -16,8 +16,8 @@ public class KafkaPayment {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = "t-send-payment", groupId = "g_send_payment", containerFactory = "paymentConcurrentKafkaListenerContainerFactory")
+    //@KafkaListener(topics = "t-send-payment", groupId = "g_send_payment", containerFactory = "paymentConcurrentKafkaListenerContainerFactory")
     public void receiverPayment(Payment payment) {
-        
+
     }
 }
