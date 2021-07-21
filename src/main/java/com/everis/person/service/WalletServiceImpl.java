@@ -28,21 +28,31 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         kafkaPayment = new KafkaPayment(kafkaTemplate);
     }
 
     @Override
     public Mono<Wallet> createWallet(Wallet wallet) {
-        return Mono.just(wallet).flatMap(obj ->{
-           obj.setId(UUID.randomUUID());
-           return repository.save(obj);
+        return Mono.just(wallet).flatMap(obj -> {
+            obj.setId(UUID.randomUUID());
+            return repository.save(obj);
         });
     }
 
     @Override
-    public Mono<Wallet> getWalletByPerson(String dni) {
-        return repository.findWalletByPersonDni(dni);
+    public Mono<Wallet> getWalletByPerson(String request) {
+        Mono<Wallet> walletMono;
+        if (request.length() == 8) {
+            walletMono = repository.findWalletByPersonDni(request);
+        } else {
+            walletMono = repository.findWalletByPersonPhoneNumber(request);
+        }
+        return walletMono;
     }
 
+    @Override
+    public Mono<Payment> getPayment() {
+        return Mono.just(kafkaPayment.getPayment());
+    }
 }

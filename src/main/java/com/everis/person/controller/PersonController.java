@@ -1,5 +1,6 @@
 package com.everis.person.controller;
 
+import com.everis.person.entity.Payment;
 import com.everis.person.entity.Wallet;
 import com.everis.person.service.WalletService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,8 @@ public class PersonController {
         return service.getWalletByPerson(dni).switchIfEmpty(Mono.error(new Exception()));
     }
 
-
+    @GetMapping("/")
+    public Mono<Payment> getPayment(){
+        return service.getPayment();
+    }
 }

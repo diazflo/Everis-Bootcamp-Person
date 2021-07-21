@@ -11,4 +11,7 @@ import java.util.UUID;
 public interface WalletRepository extends ReactiveMongoRepository<Wallet, UUID> {
 
     Mono<Wallet> findWalletByPersonDni(String dni);
+
+    Mono<Wallet> findWalletByPersonPhoneNumber(String dni);
+
 }
